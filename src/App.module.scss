@@ -1,3 +1,13 @@
-.app {
-  background-color: red;
+@use "./shared/styles/mixin/pxToRem.scss" as *;
+
+.content {
+  @apply flex items-center justify-center;
+  .form {
+    @apply bg-white rounded-3xl p-8 flex flex-col gap-8;
+    @include pxToRem(width, 600);
+    .form__title {
+      @include pxToRem(font-size, 23);
+      @apply font-medium;
+    }
+  }
 }

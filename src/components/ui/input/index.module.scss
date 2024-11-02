@@ -1,0 +1,16 @@
+.container {
+  @apply flex flex-col gap-2;
+  .label {
+    @apply text-base text-gray;
+  }
+  .input {
+    @apply rounded-xl p-4;
+    border: 1px solid rgba(34, 37, 43, 0.17);
+    &.error {
+      @apply border-rose-500 text-black;
+    }
+  }
+  .error {
+    @apply text-rose-500;
+  }
+}

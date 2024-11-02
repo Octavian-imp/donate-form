@@ -4,10 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 const path = require("path")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const TerserWebpackPlugin = require("terser-webpack-plugin")
-const dotenv = require("dotenv").config({
-  path: path.join(__dirname, ".env"),
-})
-const webpack = require("webpack")
+const Dotenv = require("dotenv-webpack")
 
 module.exports = (env) => {
   const isDev = env.MODE === "development" || env.MODE === "dev"
@@ -247,9 +244,7 @@ module.exports = (env) => {
       new MiniCssExtractPlugin({
         filename: "[name].[hash].css",
       }),
-      new webpack.DefinePlugin({
-        "process.env": dotenv.parsed,
-      }),
+      new Dotenv(),
     ],
     module: getModuleRules("scss"),
   }
@@ -257,46 +252,17 @@ module.exports = (env) => {
   return [
     {
       ...mainConfigOptions,
-      name: "html-scss-js",
+      name: "react-scss-cssModules-tailwind",
       entry: {
-        main: ["@babel/polyfill", "./index.js"],
-      },
-    },
-    {
-      ...mainConfigOptions,
-      name: "html-scss-js-tailwind",
-      entry: {
-        main: ["@babel/polyfill", "./index.js"],
-      },
-      module: getModuleRules("scss", "tailwind"),
-    },
-    {
-      ...mainConfigOptions,
-      name: "react-ts-scss-cssModules",
-      entry: {
-        main: ["@babel/polyfill", "./index.tsx"],
+        main: ["@babel/polyfill", "./index.jsx"],
       },
       resolve: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"],
+        extensions: [".js", ".jsx", ".scss", ".css"],
         alias: {
           "@": path.resolve(__dirname, "src"),
         },
       },
-      module: getModuleRules("scss", "react", "ts", "css-modules"),
-    },
-    {
-      ...mainConfigOptions,
-      name: "react-ts-scss-cssModules-tailwind",
-      entry: {
-        main: ["@babel/polyfill", "./index.tsx"],
-      },
-      resolve: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"],
-        alias: {
-          "@": path.resolve(__dirname, "src"),
-        },
-      },
-      module: getModuleRules("scss", "react", "ts", "css-modules", "tailwind"),
+      module: getModuleRules("scss", "react", "css-modules", "tailwind"),
     },
   ]
 }
