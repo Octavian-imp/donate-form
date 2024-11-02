@@ -3,3 +3,5 @@
 
 
 [ссылка на gh-pages](https://octavian-imp.github.io/donate-form.github.io/)
+
+делал проект быстро, так что с архитектурной точки зрения можно было сделать лучше
