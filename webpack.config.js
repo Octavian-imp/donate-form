@@ -244,7 +244,11 @@ module.exports = (env) => {
       new MiniCssExtractPlugin({
         filename: "[name].[hash].css",
       }),
-      new Dotenv(),
+      new Dotenv({
+        path: isDev
+          ? path.resolve(__dirname, ".env.development")
+          : path.resolve(__dirname, ".env.production"),
+      }),
     ],
     module: getModuleRules("scss"),
   }

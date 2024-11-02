@@ -1,22 +1,16 @@
 import "@/index.scss"
 import React from "react"
 import { createRoot } from "react-dom/client"
-import { createBrowserRouter, HashRouter } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import App from "./App"
 import PrepareQueryPage from "./PrepareQueryPage"
 import routes from "./routes"
 
-const router = createBrowserRouter([
-  {
-    path: routes.home,
-    element: <App />,
-  },
-  {
-    path: routes.prepareQuery,
-    element: <PrepareQueryPage />,
-  },
-])
-
 createRoot(document.getElementById("root")).render(
-  <HashRouter router={router} />
+  <BrowserRouter basename={process.env.basename}>
+    <Routes>
+      <Route path={routes.home} element={<App />} />
+      <Route path={routes.prepareQuery} element={<PrepareQueryPage />} />
+    </Routes>
+  </BrowserRouter>
 )
